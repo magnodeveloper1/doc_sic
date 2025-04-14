@@ -9,6 +9,16 @@ class Departamento(models.Model):
         max_length=200
     )
 
+    create_at = models.DateField(
+        null=False,
+        auto_now_add=True
+    )
+
+    updated_at = models.DateField(
+        null=False,
+        auto_now=True
+    )
+
     def __str__(self):
         return self.nome
     

@@ -3,7 +3,7 @@ from .models import Departamento, DocumentoDoDepartamento
 
 # Register your models here.
 class DepartamentoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nome', 'create_at', 'updated_at')
 
 class PastaAdmin(admin.ModelAdmin):
     pass
