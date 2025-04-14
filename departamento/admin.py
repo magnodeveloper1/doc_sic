@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Departamento, DocumentoDoDepartamento
+from .models import Departamento, DocumentoDoDepartamento, DocumentoEnviado
+
+class EnviadosAdmin(admin.ModelAdmin):
+    pass
 
 # Register your models here.
 class DepartamentoAdmin(admin.ModelAdmin):
@@ -10,3 +13,4 @@ class PastaAdmin(admin.ModelAdmin):
 
 admin.site.register(Departamento, DepartamentoAdmin)
 admin.site.register(DocumentoDoDepartamento, PastaAdmin)
+admin.site.register(DocumentoEnviado, EnviadosAdmin)

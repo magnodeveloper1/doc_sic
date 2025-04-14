@@ -1,5 +1,6 @@
 from django.db import models
 from documento.models import Documento
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Departamento(models.Model):
@@ -35,6 +36,27 @@ class DocumentoDoDepartamento(models.Model):
     departamento = models.ForeignKey(
         Departamento,
         on_delete=models.CASCADE
+    )
+
+class DocumentoEnviado(models.Model):
+
+    documento = models.ForeignKey(
+        Documento,
+        on_delete=models.CASCADE,
+    )
+
+    user_enviou = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    enviar_para = models.ForeignKey(
+        Departamento,
+        on_delete=models.CASCADE,
+    )
+
+    created_at = models.DateField(
+        auto_now_add=True,
     )
 
     

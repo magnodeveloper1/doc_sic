@@ -8,15 +8,11 @@ DOCUMENT_STATUS = [
     ('aproved', 'Aprovado')
 ]
 
-def logged_user(request):
-    current_user = request.user
-    return current_user
-
 # Create your models here.
 class Documento(models.Model):
     nome = models.CharField(max_length=200)
 
-    created_at = models.DateField(
+    created_at = models.DateField( 
         auto_now_add=True,
         verbose_name='Data de Criacao'
     )
@@ -80,3 +76,4 @@ class DocPartilhado(models.Model):
 
     def __str__(self):
         return self.documento.nome
+
