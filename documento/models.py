@@ -10,7 +10,10 @@ DOCUMENT_STATUS = [
 
 # Create your models here.
 class Documento(models.Model):
-    nome = models.CharField(max_length=200)
+    nome = models.CharField(
+        max_length=200,
+        unique=True
+    )
 
     created_at = models.DateField( 
         auto_now_add=True,

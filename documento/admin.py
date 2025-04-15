@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import Documento, DocPartilhado, DOCUMENT_STATUS
 from datetime import datetime
+from django.http import HttpResponseRedirect
 
 class PartilhadosComigo(admin.ModelAdmin):
 
@@ -43,6 +44,9 @@ class DocumentoAdmin(admin.ModelAdmin):
     list_filter = ("nome", "status")
     list_per_page = 25
 
+    def get_queryset(self, request):
+        return super().get_queryset(request)
+
     # actions to dashboard
     actions = ["enviar_para_direcao"]
     def enviar_para_direcao(self, request, queryset):
@@ -53,6 +57,8 @@ class DocumentoAdmin(admin.ModelAdmin):
         return super().save_model(request, obj, form, change)
 
     def response_change(self, request, obj):
+        if "_send_to_dep" in request.POST:
+            return HttpResponseRedirect("/admin/departamento/documentoenviado/add/?data_doc="+obj.nome)
         if "_send_to_aprove" in request.POST:
             obj.status = DOCUMENT_STATUS[1]
             obj.save()
@@ -72,7 +78,7 @@ class DocumentoAdmin(admin.ModelAdmin):
 
     def validar(self, obj):
         return format_html('<a class="button" href="{}"><button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"><i class="fas fa-check"></i></button></a>', "url")
-    
+
     def has_delete_permission(self, request, obj = ...):
         return False
     
