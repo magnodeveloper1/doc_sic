@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'documento',
     'departamento',
+    'sessao_crime',
 ]
 
 MIDDLEWARE = [
